@@ -108,7 +108,7 @@
             <circle class="charge-fill" cx="100" cy="100" r="92" id="chargeFill"/>
           </svg>
           <div class="charge-count" id="chargeCount">10.0</div>
-          <div class="charge-hint" id="chargeHint">УДЕРЖИВАЙ КУБ</div>
+          <div class="charge-hint">УДЕРЖИВАЙ КУБ</div>
         </div>
 
         <div class="cube-scene" id="cubeScene">
@@ -195,12 +195,12 @@
     <h2 class="section-title">Что в <span class="muted">работе</span></h2>
   </div>
   <div class="projects-list">
-    <div class="project-row reveal" onmousemove="rowGlow(event,this)" onclick="openProject(this)">
+    <div class="project-row reveal" onmousemove="rowGlow(event,this)">
       <div class="project-row-inner">
         <div class="project-num">01</div>
         <div class="project-content">
           <div class="project-name">LinkSystem</div>
-          <p class="project-text">Надёжная система для создания интерактивных визиток и лендингов. Генерация карточек, тем оформления и переходов. Бот: @linksys_robot</p>
+          <p class="project-text">Надёжная система для создания интерактивных визиток и лендингов. Генерация карточек, тем оформления и переходов.</p>
         </div>
         <div class="project-stack">
           <span class="stack-item">Python</span>
@@ -251,18 +251,23 @@
   <div class="warp-bar"><div class="warp-bar-fill"></div></div>
 </div>
 
-<div class="overload-reveal" id="overloadReveal">
-  <div class="or-glow"></div>
-  <div class="or-content">
-    <div class="or-icon"><i class="fas fa-bolt"></i></div>
-    <div class="or-tag">ACCESS GRANTED</div>
-    <div class="or-title">LinkSystem</div>
-    <div class="or-sub">секретный проект · inky://core</div>
-    <div class="or-text">Бот для создания интерактивных визиток и лендингов. Открыт для теста.</div>
-    <a class="btn-morph primary" onclick="goWarp(event,'https://t.me/linksys_robot')">
-      <span class="btn-morph-track"><span class="btn-icon"><i class="fab fa-telegram"></i></span><span class="btn-text">Открыть @linksys_robot</span></span>
-    </a>
-    <div class="or-close" onclick="closeReveal()"><i class="fas fa-xmark"></i><span>закрыть</span></div>
+<div class="hack-terminal" id="hackTerminal">
+  <div class="ht-bar">
+    <span class="ht-dot"></span><span class="ht-dot"></span><span class="ht-dot"></span>
+    <span class="ht-title">root@inky:~# exploit --target=core</span>
+  </div>
+  <pre class="ht-body" id="htBody"></pre>
+</div>
+
+<div class="virus-layer" id="virusLayer"></div>
+
+<div class="crash-screen" id="crashScreen">
+  <div class="crash-content">
+    <div class="crash-face">:(</div>
+    <div class="crash-title">SYSTEM FAILURE</div>
+    <div class="crash-text">inky://core has crashed</div>
+    <div class="crash-progress"><div class="crash-bar" id="crashBar"></div></div>
+    <div class="crash-status" id="crashStatus">Сбой ядра · восстановление через 10с</div>
   </div>
 </div>
 
