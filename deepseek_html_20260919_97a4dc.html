@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>inky</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="space">
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="space" id="space">
+  <div class="nebula n1"></div>
+  <div class="nebula n2"></div>
+  <div class="nebula n3"></div>
+  <div class="orbit orbit-1"></div>
+  <div class="orbit orbit-2"></div>
+  <div class="orbit orbit-3"></div>
+  <div class="planet"></div>
+  <div class="stars-parallax" id="starsParallax">
+    <div class="stars stars-1"></div>
+    <div class="stars stars-2"></div>
+    <div class="stars stars-3"></div>
+  </div>
+  <div class="noise"></div>
+</div>
+
+<div class="island" id="island">
+  <div class="island-trigger" id="islandTrigger" title="Темы оформления"><i class="fas fa-plus"></i></div>
+  <div class="island-themes">
+    <div class="island-dot active" data-set="space" title="Графит"></div>
+    <div class="island-dot" data-set="ocean" title="Океан"></div>
+    <div class="island-dot" data-set="crimson" title="Багровый"></div>
+    <div class="island-dot" data-set="emerald" title="Изумруд"></div>
+    <div class="island-dot" data-set="day" title="Светлая"></div>
+    <div class="island-sep" id="customSep" style="display:none;"></div>
+    <div class="island-dot" data-set="custom" id="customDot" title="Своя тема" style="display:none;"></div>
+    <div class="island-add" id="themeAdd" title="Своя тема">
+      <i class="fas fa-palette" style="font-size:9px;"></i>
+      <input type="color" id="customColorInput" value="#a855f7">
+    </div>
+  </div>
+</div>
+
+<aside class="side-rail">
+  <div class="rail-logo" data-nav="hero" title="inky"><i class="fas fa-cube"></i></div>
+  <div class="rail-divider"></div>
+  <div class="rail-link" data-nav="hero" data-label="Главная"><i class="fas fa-house"></i></div>
+  <div class="rail-link" data-nav="projects" data-label="Проекты"><i class="fas fa-layer-group"></i></div>
+  <div class="rail-link" data-nav="about" data-label="Система"><i class="fas fa-code"></i></div>
+  <div class="rail-divider"></div>
+  <div class="rail-link tg" data-label="Telegram" onclick="goWarp(event,'https://euoko.t.me')"><i class="fab fa-telegram"></i></div>
+</aside>
+
+<header class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><span class="hero-tag-dot"></span><span>inky · 2026</span></div>
+    <h1 class="hero-title">
+      <span class="stack"><span class="w-plain">Строю</span></span>
+      <span class="stack"><span class="w-gradient">надёжные</span></span>
+      <span class="stack"><span class="w-plain">системы</span></span>
+    </h1>
+    <p class="hero-desc">
+      <span class="hl">inky</span> — самоучка, делаю системы, которые работают годами.
+      Сейчас в работе <span class="hl">LinkSystem</span> — надёжная система
+      для создания визиток и лендингов.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="hero-meta-num">13</div><div class="hero-meta-label">Проектов</div></div>
+      <div class="hero-meta-item"><div class="hero-meta-num">2026</div><div class="hero-meta-label">Год</div></div>
+      <div class="hero-meta-item"><div class="hero-meta-num">70%</div><div class="hero-meta-label">Self-code</div></div>
+      <div class="hero-meta-item"><div class="hero-meta-num" data-visitors>0</div><div class="hero-meta-label">Посещения</div></div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-morph primary" onclick="go('projects')">
+        <span class="btn-morph-track"><span class="btn-icon"><i class="fas fa-arrow-down"></i></span><span class="btn-text">Проекты</span></span>
+      </a>
+      <a class="btn-morph" onclick="goWarp(event,'https://euoko.t.me')">
+        <span class="btn-morph-track"><span class="btn-icon"><i class="fab fa-telegram"></i></span><span class="btn-text">Telegram</span></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="cube-window-shadow"></div>
+    <div class="cube-window">
+      <div class="cube-window-head">
+        <div class="cw-dots">
+          <div class="cw-dot r"></div>
+          <div class="cw-dot y"></div>
+          <div class="cw-dot g"></div>
+        </div>
+        <div class="cw-title"><i class="fas fa-cube"></i><span>inky://showcase</span></div>
+        <div class="cw-visitors" title="Посещений">
+          <i class="fas fa-eye"></i>
+          <span data-visitors>0</span>
+        </div>
+      </div>
+
+      <div class="cube-window-body">
+        <div class="charge-overlay" id="chargeOverlay">
+          <svg class="charge-svg" viewBox="0 0 200 200">
+            <circle class="charge-track" cx="100" cy="100" r="92"/>
+            <circle class="charge-fill" cx="100" cy="100" r="92" id="chargeFill"/>
+          </svg>
+          <div class="charge-count" id="chargeCount">10.0</div>
+          <div class="charge-hint" id="chargeHint">УДЕРЖИВАЙ КУБ</div>
+        </div>
+
+        <div class="cube-scene" id="cubeScene">
+          <div class="stage-glow"></div>
+          <div class="stage-spec"></div>
+          <div class="cube-stage" id="cubeStage">
+            <div class="charge-aura"></div>
+            <div class="cube" id="cube">
+              <div class="cube-face front" data-light="front">
+                <div class="face-light"></div>
+                <div class="face-icon"><i class="fas fa-cube"></i></div>
+                <div class="face-title">LinkSystem</div>
+                <div class="face-sub">inky·core</div>
+                <div class="face-visitors">
+                  <i class="fas fa-eye"></i>
+                  <span data-visitors>0</span>
+                </div>
+              </div>
+              <div class="cube-face back" data-light="back">
+                <div class="face-light"></div>
+                <div class="face-num">13</div>
+                <div class="face-label">Проектов</div>
+                <div class="face-icon"><i class="fas fa-layer-group"></i></div>
+              </div>
+              <div class="cube-face right" data-light="right">
+                <div class="face-light"></div>
+                <div class="face-num">70%</div>
+                <div class="face-label">Self-code</div>
+                <div class="face-icon"><i class="fas fa-code"></i></div>
+              </div>
+              <div class="cube-face left" data-light="left">
+                <div class="face-light"></div>
+                <div class="face-num">01</div>
+                <div class="face-label">Featured</div>
+                <div class="face-icon"><i class="fas fa-star"></i></div>
+              </div>
+              <div class="cube-face top" data-light="top">
+                <div class="face-light"></div>
+                <div class="face-num">2026</div>
+                <div class="face-label">Год</div>
+              </div>
+              <div class="cube-face bottom" data-light="bottom">
+                <div class="face-light"></div>
+                <div class="face-label" style="margin-bottom:4px;">Stack</div>
+                <div class="face-stack">
+                  <span class="face-chip hl">Python</span>
+                  <span class="face-chip hl">Telebot</span>
+                  <span class="face-chip">JSON</span>
+                  <span class="face-chip">HTML</span>
+                  <span class="face-chip">CSS</span>
+                  <span class="face-chip">JS</span>
+                </div>
+              </div>
+
+              <div class="cube-fill">
+                <div class="cube-fill-face front"></div>
+                <div class="cube-fill-face back"></div>
+                <div class="cube-fill-face right"></div>
+                <div class="cube-fill-face left"></div>
+                <div class="cube-fill-face top"></div>
+                <div class="cube-fill-face bottom"></div>
+              </div>
+            </div>
+            <div class="cube-orbit"></div>
+            <div class="cube-orbit o2"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cube-window-foot">
+        <div class="cwf-label"><i class="fas fa-arrows-alt"></i><span>потяни · удерживай 10с</span></div>
+        <div class="cwf-visitors">
+          <i class="fas fa-user"></i>
+          <span data-visitors>0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="projects">
+  <div class="section-head reveal">
+    <div class="section-num">Проекты · 01 / 13</div>
+    <h2 class="section-title">Что в <span class="muted">работе</span></h2>
+  </div>
+  <div class="projects-list">
+    <div class="project-row reveal" onmousemove="rowGlow(event,this)" onclick="openProject(this)">
+      <div class="project-row-inner">
+        <div class="project-num">01</div>
+        <div class="project-content">
+          <div class="project-name">LinkSystem</div>
+          <p class="project-text">Надёжная система для создания интерактивных визиток и лендингов. Генерация карточек, тем оформления и переходов. Бот: @linksys_robot</p>
+        </div>
+        <div class="project-stack">
+          <span class="stack-item">Python</span>
+          <span class="stack-item">Telebot</span>
+          <span class="stack-item">JSON</span>
+          <span class="stack-item">HTML</span>
+          <span class="stack-item">CSS</span>
+          <span class="stack-item">JS</span>
+        </div>
+        <div class="project-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+    </div>
+    <div class="project-row empty reveal" onmousemove="rowGlow(event,this)">
+      <div class="project-row-inner">
+        <div class="empty-icon"><i class="fas fa-hourglass-half"></i></div>
+        <div class="project-content">
+          <div class="project-name" style="color:var(--c-text-faint);">Скоро здесь что-то появится</div>
+          <p class="project-text">Ещё 12 проектов в разработке</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="section-head reveal">
+    <div class="section-num">Система</div>
+    <h2 class="section-title">Как это <span class="muted">работает</span></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-card reveal"><div class="about-num">01</div><div class="about-icon"><i class="fas fa-code"></i></div><div class="about-title">Чистый код</div><p class="about-text">Python, Telebot, JSON и веб-стек без сборщиков и лишних зависимостей. Прозрачно и понятно.</p></div>
+    <div class="about-card reveal"><div class="about-num">02</div><div class="about-icon"><i class="fas fa-shield-halved"></i></div><div class="about-title">Надёжность</div><p class="about-text">Системы, которые работают годами. Без хрупких зависимостей и внешних сервисов.</p></div>
+    <div class="about-card reveal"><div class="about-num">03</div><div class="about-icon"><i class="fas fa-bolt"></i></div><div class="about-title">Интерактив</div><p class="about-text">Живой космический фон, параллакс, плавные анимации и собственные эффекты клика.</p></div>
+  </div>
+</section>
+
+<footer class="footer"><div class="footer-text">© 2026 inky</div></footer>
+
+<div class="warp-flash" id="warpFlash"></div>
+<div class="warp" id="warp">
+  <div class="warp-bg"></div>
+  <div class="warp-glow"></div>
+  <div class="warp-content">
+    <div class="warp-rings"><div class="warp-ring"></div><div class="warp-ring"></div><div class="warp-ring"></div><i class="warp-icon fab fa-telegram"></i></div>
+    <div class="warp-text">Переход в Telegram</div>
+    <div class="warp-sub">euoko.t.me</div>
+  </div>
+  <div class="warp-bar"><div class="warp-bar-fill"></div></div>
+</div>
+
+<div class="overload-reveal" id="overloadReveal">
+  <div class="or-glow"></div>
+  <div class="or-content">
+    <div class="or-icon"><i class="fas fa-bolt"></i></div>
+    <div class="or-tag">ACCESS GRANTED</div>
+    <div class="or-title">LinkSystem</div>
+    <div class="or-sub">секретный проект · inky://core</div>
+    <div class="or-text">Бот для создания интерактивных визиток и лендингов. Открыт для теста.</div>
+    <a class="btn-morph primary" onclick="goWarp(event,'https://t.me/linksys_robot')">
+      <span class="btn-morph-track"><span class="btn-icon"><i class="fab fa-telegram"></i></span><span class="btn-text">Открыть @linksys_robot</span></span>
+    </a>
+    <div class="or-close" onclick="closeReveal()"><i class="fas fa-xmark"></i><span>закрыть</span></div>
+  </div>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
